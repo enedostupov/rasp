@@ -30,6 +30,7 @@ class SerialInitializer:
         time.sleep(1)
         while ser.inWaiting() > 0:
             response += ser.read(1)
+        print(response)
         self.ports[response] = full_port_name
         ser.close()
 
