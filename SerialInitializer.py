@@ -15,8 +15,11 @@ class SerialInitializer:
     def is_port_enabled(self, port_name):
         full_port_name = self.path + '/' + port_name
         print(full_port_name)
+        ser = serial.Serial()
+        ser.port = full_port_name;
+        ser.baudrate = 9600
         try:
-            ser = serial.Serial(full_port_name, 9600)
+            ser.open()
         except:
             print('can not open serial')
             return
@@ -26,6 +29,8 @@ class SerialInitializer:
         except:
             print('can not write')
 
+        ser.flushInput()
+        ser.flushOutput()
         response = ''
         time.sleep(1)
         while ser.inWaiting() > 0:
