@@ -1,6 +1,7 @@
 import os
 import serial
 import time
+import re
 
 
 class SerialInitializer:
@@ -8,6 +9,7 @@ class SerialInitializer:
         self.ports = {}
         self.request = request
         self.path = '/dev'
+        self.mask = 'ttyUSB'
         self.fill_up_enabled_ports()
 
     def is_port_enabled(self, port_name):
@@ -28,7 +30,8 @@ class SerialInitializer:
     def fill_up_enabled_ports(self):
         dirs = os.listdir(self.path)
         for file in dirs:
-            self.is_port_enabled(file)
+            if re.match(self.mask, file):
+                self.is_port_enabled(file)
 
     def get_port_by_response(self, response):
         if response in self.ports:
