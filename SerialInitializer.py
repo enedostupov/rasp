@@ -12,11 +12,8 @@ class SerialInitializer:
 
     def is_port_enabled(self, port_name):
         full_port_name = self.path + '/' + port_name
-        ser = serial.Serial()
-        ser.port = full_port_name
-        ser.baudrate = 9600
         try:
-            ser.open()
+            ser = serial.Serial(full_port_name, 9600)
             ser.write(self.request)
         except:
             return
