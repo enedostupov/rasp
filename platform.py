@@ -15,8 +15,10 @@ telemetry_serial = None
 telemetrySender = None
 
 serialInitializer = SerialInitializer('900000#')
+print('SerialInitializer - done')
 
 control_serial_device_name = serialInitializer.get_port_by_response(control_response)
+print('control_serial_device_name - done')
 if control_serial_device_name:
     print('control port was founded')
 #    control_serial = serial.Serial(control_serial_device_name, 9600)
@@ -26,6 +28,7 @@ else:
     print('control port was not founded')
 
 telemetry_serial_device_name = serialInitializer.get_port_by_response(telemetry_response)
+print('telemetry_serial_device_name - done')
 if telemetry_serial_device_name:
     print('telemetry port was founded')
 #    telemetry_serial = serial.Serial(telemetry_serial_device_name, 9600)
