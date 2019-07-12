@@ -17,9 +17,15 @@ class SerialInitializer:
         print(full_port_name)
         try:
             ser = serial.Serial(full_port_name, 9600)
+        except:
+            print('can not open serial')
+            return
+
+        try:
             ser.write(self.request)
         except:
-            return
+            print('can not write')
+
         response = ''
         time.sleep(1)
         while ser.inWaiting() > 0:
