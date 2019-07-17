@@ -12,11 +12,5 @@ class TelemetrySender(threading.Thread):
 
     def run(self):
         while True:
-            response = ''
-            time.sleep(1)
-            while self.serial_port.inWaiting() > 0:
-                next_char = self.serial_port.read(1)
-                if next_char == '#':
-                    break
-                response += next_char;
+            response = self.serial_port.readline().rstrip()
             print(response)
